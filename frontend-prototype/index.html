@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Segmentación de clientes, prototipo</title>
+<style>
+  :root { --bg:#f8fafc; --card:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --accent:#4f46e5; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--ink); }
+  header { display:flex; align-items:center; justify-content:space-between; padding:16px 28px; background:var(--card); border-bottom:1px solid var(--line); }
+  header h1 { font-size:18px; margin:0; }
+  .badge { font-size:12px; padding:4px 10px; border-radius:999px; background:#fee2e2; color:#991b1b; }
+  .badge.ok { background:#dcfce7; color:#166534; }
+  main { display:grid; grid-template-columns: 360px 1fr; gap:20px; padding:20px 28px; max-width:1400px; margin:auto; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px; }
+  h2 { font-size:15px; margin:0 0 12px; }
+  h3 { font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin:16px 0 8px; }
+  label { display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:13px; margin:6px 0; }
+  label span small { color:var(--muted); }
+  input, select { width:120px; padding:6px 8px; border:1px solid var(--line); border-radius:6px; font-size:13px; text-align:right; }
+  select { width:100%; text-align:left; }
+  button { cursor:pointer; border:0; border-radius:8px; font-size:13px; }
+  .primary { width:100%; margin-top:14px; padding:10px; background:var(--accent); color:#fff; font-weight:600; }
+  .samples { display:flex; flex-wrap:wrap; gap:6px; }
+  .samples button { padding:5px 9px; background:#eef2ff; color:#3730a3; }
+  .right { display:grid; gap:20px; grid-template-columns: 1fr 1fr; align-content:start; }
+  .full { grid-column: 1 / -1; }
+  .seg-title { font-size:22px; font-weight:700; margin:4px 0; }
+  .pill { display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+  .muted { color:var(--muted); font-size:13px; }
+  .rec { background:#f0fdf4; border:1px solid #bbf7d0; padding:10px 12px; border-radius:8px; font-size:13px; margin-top:10px; }
+  .warn { background:#fef2f2; border:1px solid #fecaca; padding:10px 12px; border-radius:8px; font-size:13px; margin-top:10px; color:#991b1b; }
+  .okbox { background:#f8fafc; border:1px solid var(--line); padding:8px 12px; border-radius:8px; font-size:12px; margin-top:10px; color:var(--muted); }
+  .bar { display:flex; align-items:center; gap:8px; font-size:12px; margin:5px 0; }
+  .bar .track { flex:1; height:8px; background:#f1f5f9; border-radius:4px; overflow:hidden; }
+  .bar .fill { height:100%; }
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  th, td { padding:5px 6px; border-bottom:1px solid var(--line); text-align:right; }
+  th:first-child, td:first-child { text-align:left; }
+  .up { color:#b45309; } .down { color:#0369a1; }
+  canvas { width:100%; height:auto; display:block; }
+  .legend { display:flex; flex-wrap:wrap; gap:10px; font-size:12px; margin-top:8px; }
+  .metrics { display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; }
+  .metric { border:1px solid var(--line); border-radius:8px; padding:10px; font-size:12px; }
+  .metric b { font-size:13px; }
+  .tag { font-size:11px; background:#ede9fe; color:#5b21b6; padding:2px 6px; border-radius:4px; margin-left:4px; }
+  #error { display:none; }
+  @media (max-width: 1000px) { main, .right { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🛒 Segmentación de clientes <span class="muted">· prototipo de referencia</span></h1>
+  <span id="health" class="badge">Comprobando la API…</span>
+</header>
+
+<main>
+  <!--Formulario-->
+  <section class="card">
+    <h2>Datos del cliente</h2>
+    <h3>Cargar un cliente real del dataset</h3>
+    <div id="samples" class="samples"></div>
+
+    <h3>Modelo</h3>
+    <select id="model">
+      <option value="all">K-Means con detección de atípicos</option>
+      <option value="kmeans">Solo K-Means</option>
+      <option value="dbscan">Solo DBSCAN</option>
+    </select>
+
+    <form id="form"></form>
+    <button class="primary" id="submit">🔍 Asignar segmento</button>
+    <div id="error" class="warn"></div>
+  </section>
+
+  <!--Resultados-->
+  <section class="right">
+    <div class="card" id="result">
+      <h2>Resultado</h2>
+      <p class="muted">Se completa el formulario o se carga un ejemplo y luego se pulsa <b>Asignar segmento</b>.</p>
+    </div>
+
+    <div class="card">
+      <h2>Mapa PCA 2D</h2>
+      <canvas id="plot" width="640" height="480"></canvas>
+      <div id="legend" class="legend"></div>
+    </div>
+
+    <div class="card" id="detail" style="display:none">
+      <h2>Afinidad con cada segmento (K-Means)</h2>
+      <div id="membership"></div>
+      <h3>Variables que más se alejan de su segmento</h3>
+      <div id="deviations"></div>
+    </div>
+
+    <div class="card" id="compare" style="display:none">
+      <h2>Cliente frente a su segmento</h2>
+      <div id="compareTable"></div>
+    </div>
+
+    <div class="card full">
+      <h2>Comparación de modelos</h2>
+      <div id="metrics" class="metrics"></div>
+    </div>
+  </section>
+</main>
+
+<script type="module">
+import {
+  checkApiHealth, fetchMetadata, fetchSamples, fetchModelsComparison, fetchPcaPoints, predictSegment,
+} from './api.js';
+
+const $ = (id) => document.getElementById(id);
+const fmt = (v, d = 0) => Number(v).toLocaleString('es-EC', { maximumFractionDigits: d });
+const SAMPLE_LABELS = { low: 'Ahorrador', premium: 'Premium', deals: 'Ofertas', consolidated: 'Consolidado', noise: 'Atípico' };
+
+let META = null;
+let POINTS = { kmeans: [], dbscan: [] };
+let lastPoint = null;
+
+//Inicialización
+async function init() {
+  const health = await checkApiHealth();
+  if (health.status !== 'healthy') {
+    $('health').textContent = 'API sin conexión';
+    showError('No se pudo conectar con la API. Se debe ejecutar cd backend && uvicorn app.main:app --reload --port 8000');
+    return;
+  }
+  $('health').textContent = `API activa con ${health.loaded_models.length} modelos, principal ${health.recommended_model}`;
+  $('health').classList.add('ok');
+
+  [META, POINTS.kmeans, POINTS.dbscan] = await Promise.all([
+    fetchMetadata(), fetchPcaPoints('kmeans'), fetchPcaPoints('dbscan'),
+  ]);
+  buildForm();
+  buildSamples(await fetchSamples());
+  renderMetrics(await fetchModelsComparison());
+  drawPlot();
+}
+
+//Formulario construido a partir de /api/metadata
+function buildForm() {
+  const groups = {};
+  for (const f of META.features) (groups[META.feature_info[f].group] ??= []).push(f);
+  $('form').innerHTML = Object.entries(groups).map(([g, feats]) => `
+    <h3>${g}</h3>
+    ${feats.map((f) => {
+      const i = META.feature_info[f], s = META.feature_stats[f];
+      return `<label title="Rango del dataset entre ${fmt(s.min)} y ${fmt(s.max)}">
+        <span>${i.label} <small>${i.unit}</small></span>
+        <input type="number" min="0" step="${i.step}" name="${f}" value="${s.median}">
+      </label>`;
+    }).join('')}`).join('');
+}
+
+function buildSamples(samples) {
+  if (!samples) return;
+  $('samples').innerHTML = '';
+  for (const [key, cases] of Object.entries(samples)) {
+    cases.forEach((c, i) => {
+      const b = document.createElement('button');
+      b.textContent = `${SAMPLE_LABELS[key] ?? key}${cases.length > 1 ? ' ' + (i + 1) : ''}`;
+      b.title = `Cliente ID ${c.id}`;
+      b.onclick = () => { fillForm(c.features); if (key === 'noise') $('model').value = 'all'; submit(); };
+      $('samples').appendChild(b);
+    });
+  }
+}
+
+function fillForm(features) {
+  for (const [k, v] of Object.entries(features)) {
+    const el = document.querySelector(`#form [name="${k}"]`);
+    if (el) el.value = v;
+  }
+}
+
+function readForm() {
+  const out = {};
+  document.querySelectorAll('#form input').forEach((el) => { if (el.value !== '') out[el.name] = Number(el.value); });
+  return out;
+}
+
+//Predicción
+async function submit() {
+  $('error').style.display = 'none';
+  try {
+    const res = await predictSegment(readForm(), $('model').value);
+    renderResult(res);
+  } catch (err) {
+    showError(err.message);
+  }
+}
+$('submit').onclick = submit;
+
+function showError(msg) { $('error').textContent = msg; $('error').style.display = 'block'; }
+
+function renderResult(r) {
+  lastPoint = r;
+  const oc = r.outlier_check;
+  $('result').innerHTML = `
+    <h2>Resultado <span class="tag">${r.active_model_name}</span></h2>
+    <div class="muted">${r.is_noise ? 'Sin cluster' : 'Cluster ' + r.cluster_id}</div>
+    <div class="seg-title"><span class="pill" style="background:${r.color}"></span>${r.segment_name}</div>
+    <p class="muted">${r.description}</p>
+    <div class="rec"><b>Recomendación</b> ${r.recommendation}</div>
+    ${oc.is_outlier
+      ? `<div class="warn">⚠️ ${oc.message} (distancia ${oc.distance_to_core.toFixed(2)} &gt; eps ${oc.eps})</div>`
+      : `<div class="okbox">✔ ${oc.message}</div>`}
+    ${r.out_of_range_features.length
+      ? `<div class="warn">Hay valores fuera del rango del entrenamiento en ${r.out_of_range_features
+          .map((f) => META.feature_info[f].label).join(', ')}</div>` : ''}
+    <div class="okbox">PCA (${r.pca.x}, ${r.pca.y}) · K-Means → ${r.multi_model_summary.kmeans.segment_name}
+      · DBSCAN → ${r.multi_model_summary.dbscan.segment_name}</div>`;
+
+  const km = r.multi_model_summary.kmeans;
+  $('membership').innerHTML = Object.entries(km.membership).map(([c, v]) => {
+    const s = META.segments[c];
+    return `<div class="bar"><span style="width:150px">${s.name}</span>
+      <div class="track"><div class="fill" style="width:${v}%;background:${s.color}"></div></div>
+      <b style="width:48px;text-align:right">${v.toFixed(1)}%</b></div>`;
+  }).join('');
+  $('deviations').innerHTML = r.top_deviations.length
+    ? r.top_deviations.map((d) => `<div class="bar"><span style="flex:1">${d.label}</span>
+        <span class="${d.deviation_z > 0 ? 'up' : 'down'}">${d.direction} (z=${d.deviation_z})</span></div>`).join('')
+    : '<p class="muted">El cliente es muy parecido al promedio de su segmento.</p>';
+  $('detail').style.display = 'block';
+
+  $('compareTable').innerHTML = `<table>
+    <tr><th>Variable</th><th>Cliente</th><th>Segmento</th><th>Global</th></tr>
+    ${Object.entries(r.comparison).map(([f, c]) => `<tr>
+      <td>${META.feature_info[f].label}${c.is_out_of_range ? ' ⚠️' : ''}</td>
+      <td class="${c.is_above_segment ? 'up' : 'down'}">${fmt(c.value, 1)}</td>
+      <td>${fmt(c.segment_mean, 1)}</td><td>${fmt(c.global_mean, 1)}</td></tr>`).join('')}
+  </table>`;
+  $('compare').style.display = 'block';
+  drawPlot();
+}
+
+//Gráfico PCA hecho con canvas y sin librerías
+function drawPlot() {
+  if (!META) return;
+  const useDb = $('model').value === 'dbscan';
+  const pts = useDb ? POINTS.dbscan : POINTS.kmeans;
+  const cv = $('plot'), ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height, pad = 40;
+  const xs = pts.map((p) => p.x).concat(lastPoint ? [lastPoint.pca.x] : []);
+  const ys = pts.map((p) => p.y).concat(lastPoint ? [lastPoint.pca.y] : []);
+  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+  const sx = (x) => pad + (x - x0) / (x1 - x0) * (W - 2 * pad);
+  const sy = (y) => H - pad - (y - y0) / (y1 - y0) * (H - 2 * pad);
+
+  const color = (c) => {
+    if (!useDb) return META.segments[c].color;
+    if (c === -1) return META.noise_segment.color;
+    return c === 0 ? '#22c55e' : '#a855f7';
+  };
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.strokeStyle = '#e2e8f0'; ctx.strokeRect(pad, pad, W - 2 * pad, H - 2 * pad);
+  ctx.globalAlpha = 0.55;
+  for (const p of pts) {
+    ctx.fillStyle = color(p.cluster);
+    ctx.beginPath(); ctx.arc(sx(p.x), sy(p.y), 2.4, 0, 7); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  if (!useDb) {
+    for (const s of Object.values(META.segments)) {
+      const [cx, cy] = s.centroid_pca;
+      ctx.fillStyle = '#0f172a'; ctx.font = 'bold 16px system-ui'; ctx.fillText('✕', sx(cx) - 6, sy(cy) + 6);
+    }
+  }
+  if (lastPoint) {
+    const X = sx(lastPoint.pca.x), Y = sy(lastPoint.pca.y);
+    ctx.fillStyle = lastPoint.color; ctx.strokeStyle = '#0f172a'; ctx.lineWidth = 2;
+    star(ctx, X, Y, 13, 6); ctx.fill(); ctx.stroke(); ctx.lineWidth = 1;
+  }
+  ctx.fillStyle = '#64748b'; ctx.font = '12px system-ui';
+  ctx.fillText(META.pca.axis_labels[0], W / 2 - 90, H - 12);
+  ctx.save(); ctx.translate(14, H / 2 + 90); ctx.rotate(-Math.PI / 2); ctx.fillText(META.pca.axis_labels[1], 0, 0); ctx.restore();
+
+  $('legend').innerHTML = (useDb
+    ? [['#22c55e', 'Núcleo denso'], ['#a855f7', 'Grupos pequeños'], [META.noise_segment.color, 'Ruido']]
+    : Object.values(META.segments).map((s) => [s.color, `${s.id} · ${s.name}`]))
+    .map(([c, n]) => `<span><span class="pill" style="background:${c}"></span>${n}</span>`).join('')
+    + '<span>★ cliente nuevo</span>';
+}
+$('model').onchange = drawPlot;
+
+function star(ctx, x, y, R, r) {
+  ctx.beginPath();
+  for (let i = 0; i < 10; i++) {
+    const a = Math.PI / 5 * i - Math.PI / 2, rad = i % 2 ? r : R;
+    ctx.lineTo(x + rad * Math.cos(a), y + rad * Math.sin(a));
+  }
+  ctx.closePath();
+}
+
+//Métricas
+function renderMetrics(cmp) {
+  $('metrics').innerHTML = cmp.models.map((m) => `
+    <div class="metric">
+      <b>${m.name}</b>${m.is_recommended ? '<span class="tag">modelo principal</span>' : ''}
+      <p class="muted">${m.description}</p>
+      Hiperparámetros <code>${JSON.stringify(m.hyperparameters)}</code><br>
+      Clusters <b>${m.metrics.n_clusters}</b> · Silhouette <b>${m.metrics.silhouette}</b>
+      · Ruido <b>${m.metrics.noise_pct}%</b> · Cluster mayor <b>${m.metrics.largest_cluster_pct}%</b>
+    </div>`).join('') + `<div class="metric full muted">${cmp.selection_criterion}</div>`;
+}
+
+init();
+</script>
+</body>
+</html>

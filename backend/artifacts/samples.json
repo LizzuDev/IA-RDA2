@@ -1,0 +1,201 @@
+{
+  "low": [
+    {
+      "id": 7505,
+      "segment_id": 0,
+      "features": {
+        "Income": 44155.0,
+        "Age": 57.0,
+        "Children": 2.0,
+        "Recency": 24.0,
+        "MntWines": 22.0,
+        "MntFruits": 1.0,
+        "MntMeatProducts": 9.0,
+        "MntFishProducts": 0.0,
+        "MntSweetProducts": 0.0,
+        "MntGoldProds": 14.0,
+        "NumDealsPurchases": 1.0,
+        "NumWebPurchases": 1.0,
+        "NumCatalogPurchases": 1.0,
+        "NumStorePurchases": 2.0,
+        "NumWebVisitsMonth": 4.0
+      }
+    },
+    {
+      "id": 6919,
+      "segment_id": 0,
+      "features": {
+        "Income": 26224.0,
+        "Age": 36.0,
+        "Children": 1.0,
+        "Recency": 39.0,
+        "MntWines": 4.0,
+        "MntFruits": 7.0,
+        "MntMeatProducts": 15.0,
+        "MntFishProducts": 13.0,
+        "MntSweetProducts": 9.0,
+        "MntGoldProds": 15.0,
+        "NumDealsPurchases": 3.0,
+        "NumWebPurchases": 2.0,
+        "NumCatalogPurchases": 1.0,
+        "NumStorePurchases": 3.0,
+        "NumWebVisitsMonth": 6.0
+      }
+    }
+  ],
+  "premium": [
+    {
+      "id": 9349,
+      "segment_id": 1,
+      "features": {
+        "Income": 92533.0,
+        "Age": 29.0,
+        "Children": 0.0,
+        "Recency": 84.0,
+        "MntWines": 693.0,
+        "MntFruits": 21.0,
+        "MntMeatProducts": 118.0,
+        "MntFishProducts": 110.0,
+        "MntSweetProducts": 147.0,
+        "MntGoldProds": 42.0,
+        "NumDealsPurchases": 1.0,
+        "NumWebPurchases": 6.0,
+        "NumCatalogPurchases": 5.0,
+        "NumStorePurchases": 11.0,
+        "NumWebVisitsMonth": 2.0
+      }
+    },
+    {
+      "id": 7233,
+      "segment_id": 1,
+      "features": {
+        "Income": 69209.0,
+        "Age": 42.0,
+        "Children": 0.0,
+        "Recency": 4.0,
+        "MntWines": 496.0,
+        "MntFruits": 32.0,
+        "MntMeatProducts": 849.0,
+        "MntFishProducts": 229.0,
+        "MntSweetProducts": 48.0,
+        "MntGoldProds": 128.0,
+        "NumDealsPurchases": 2.0,
+        "NumWebPurchases": 5.0,
+        "NumCatalogPurchases": 3.0,
+        "NumStorePurchases": 6.0,
+        "NumWebVisitsMonth": 4.0
+      }
+    }
+  ],
+  "deals": [
+    {
+      "id": 1584,
+      "segment_id": 3,
+      "features": {
+        "Income": 41443.0,
+        "Age": 37.0,
+        "Children": 1.0,
+        "Recency": 79.0,
+        "MntWines": 171.0,
+        "MntFruits": 7.0,
+        "MntMeatProducts": 171.0,
+        "MntFishProducts": 25.0,
+        "MntSweetProducts": 19.0,
+        "MntGoldProds": 89.0,
+        "NumDealsPurchases": 6.0,
+        "NumWebPurchases": 8.0,
+        "NumCatalogPurchases": 1.0,
+        "NumStorePurchases": 5.0,
+        "NumWebVisitsMonth": 8.0
+      }
+    },
+    {
+      "id": 1916,
+      "segment_id": 3,
+      "features": {
+        "Income": 45736.0,
+        "Age": 60.0,
+        "Children": 1.0,
+        "Recency": 92.0,
+        "MntWines": 188.0,
+        "MntFruits": 3.0,
+        "MntMeatProducts": 180.0,
+        "MntFishProducts": 20.0,
+        "MntSweetProducts": 3.0,
+        "MntGoldProds": 43.0,
+        "NumDealsPurchases": 5.0,
+        "NumWebPurchases": 7.0,
+        "NumCatalogPurchases": 1.0,
+        "NumStorePurchases": 6.0,
+        "NumWebVisitsMonth": 7.0
+      }
+    }
+  ],
+  "consolidated": [
+    {
+      "id": 2909,
+      "segment_id": 2,
+      "features": {
+        "Income": 78128.0,
+        "Age": 40.0,
+        "Children": 1.0,
+        "Recency": 89.0,
+        "MntWines": 934.0,
+        "MntFruits": 24.0,
+        "MntMeatProducts": 230.0,
+        "MntFishProducts": 16.0,
+        "MntSweetProducts": 24.0,
+        "MntGoldProds": 36.0,
+        "NumDealsPurchases": 2.0,
+        "NumWebPurchases": 8.0,
+        "NumCatalogPurchases": 4.0,
+        "NumStorePurchases": 6.0,
+        "NumWebVisitsMonth": 3.0
+      }
+    },
+    {
+      "id": 257,
+      "segment_id": 2,
+      "features": {
+        "Income": 75032.0,
+        "Age": 55.0,
+        "Children": 1.0,
+        "Recency": 74.0,
+        "MntWines": 952.0,
+        "MntFruits": 12.0,
+        "MntMeatProducts": 180.0,
+        "MntFishProducts": 47.0,
+        "MntSweetProducts": 12.0,
+        "MntGoldProds": 12.0,
+        "NumDealsPurchases": 2.0,
+        "NumWebPurchases": 5.0,
+        "NumCatalogPurchases": 4.0,
+        "NumStorePurchases": 9.0,
+        "NumWebVisitsMonth": 3.0
+      }
+    }
+  ],
+  "noise": [
+    {
+      "id": 9931,
+      "segment_id": 3,
+      "features": {
+        "Income": 4023.0,
+        "Age": 51.0,
+        "Children": 2.0,
+        "Recency": 29.0,
+        "MntWines": 5.0,
+        "MntFruits": 0.0,
+        "MntMeatProducts": 1.0,
+        "MntFishProducts": 1.0,
+        "MntSweetProducts": 1.0,
+        "MntGoldProds": 1.0,
+        "NumDealsPurchases": 15.0,
+        "NumWebPurchases": 0.0,
+        "NumCatalogPurchases": 0.0,
+        "NumStorePurchases": 0.0,
+        "NumWebVisitsMonth": 19.0
+      }
+    }
+  ]
+}

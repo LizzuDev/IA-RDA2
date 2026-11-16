@@ -1,0 +1,487 @@
+{
+  "dataset": "Customer Personality Analysis (Kaggle, imakash3011)",
+  "n_customers": 2236,
+  "features": [
+    "Income",
+    "Age",
+    "Children",
+    "Recency",
+    "MntWines",
+    "MntFruits",
+    "MntMeatProducts",
+    "MntFishProducts",
+    "MntSweetProducts",
+    "MntGoldProds",
+    "NumDealsPurchases",
+    "NumWebPurchases",
+    "NumCatalogPurchases",
+    "NumStorePurchases",
+    "NumWebVisitsMonth"
+  ],
+  "feature_info": {
+    "Income": {
+      "label": "Ingreso anual del hogar",
+      "unit": "$",
+      "group": "Perfil",
+      "step": 1000
+    },
+    "Age": {
+      "label": "Edad",
+      "unit": "años",
+      "group": "Perfil",
+      "step": 1
+    },
+    "Children": {
+      "label": "Hijos en casa",
+      "unit": "",
+      "group": "Perfil",
+      "step": 1
+    },
+    "Recency": {
+      "label": "Días desde la última compra",
+      "unit": "días",
+      "group": "Perfil",
+      "step": 1
+    },
+    "MntWines": {
+      "label": "Gasto en vinos",
+      "unit": "$ en 2 años",
+      "group": "Gasto",
+      "step": 1
+    },
+    "MntFruits": {
+      "label": "Gasto en frutas",
+      "unit": "$ en 2 años",
+      "group": "Gasto",
+      "step": 1
+    },
+    "MntMeatProducts": {
+      "label": "Gasto en carnes",
+      "unit": "$ en 2 años",
+      "group": "Gasto",
+      "step": 1
+    },
+    "MntFishProducts": {
+      "label": "Gasto en pescado",
+      "unit": "$ en 2 años",
+      "group": "Gasto",
+      "step": 1
+    },
+    "MntSweetProducts": {
+      "label": "Gasto en dulces",
+      "unit": "$ en 2 años",
+      "group": "Gasto",
+      "step": 1
+    },
+    "MntGoldProds": {
+      "label": "Gasto en oro",
+      "unit": "$ en 2 años",
+      "group": "Gasto",
+      "step": 1
+    },
+    "NumDealsPurchases": {
+      "label": "Compras con descuento",
+      "unit": "compras",
+      "group": "Canales",
+      "step": 1
+    },
+    "NumWebPurchases": {
+      "label": "Compras por la web",
+      "unit": "compras",
+      "group": "Canales",
+      "step": 1
+    },
+    "NumCatalogPurchases": {
+      "label": "Compras por catálogo",
+      "unit": "compras",
+      "group": "Canales",
+      "step": 1
+    },
+    "NumStorePurchases": {
+      "label": "Compras en tienda",
+      "unit": "compras",
+      "group": "Canales",
+      "step": 1
+    },
+    "NumWebVisitsMonth": {
+      "label": "Visitas web en el último mes",
+      "unit": "visitas",
+      "group": "Canales",
+      "step": 1
+    }
+  },
+  "feature_stats": {
+    "Income": {
+      "mean": 51952.5013,
+      "std": 21411.4699,
+      "min": 1730.0,
+      "max": 162397.0,
+      "median": 51371.0
+    },
+    "Age": {
+      "mean": 45.102,
+      "std": 11.7033,
+      "min": 18.0,
+      "max": 74.0,
+      "median": 44.0
+    },
+    "Children": {
+      "mean": 0.9508,
+      "std": 0.7522,
+      "min": 0.0,
+      "max": 3.0,
+      "median": 1.0
+    },
+    "Recency": {
+      "mean": 49.1163,
+      "std": 28.9573,
+      "min": 0.0,
+      "max": 99.0,
+      "median": 49.0
+    },
+    "MntWines": {
+      "mean": 304.1275,
+      "std": 336.5918,
+      "min": 0.0,
+      "max": 1493.0,
+      "median": 174.0
+    },
+    "MntFruits": {
+      "mean": 26.2759,
+      "std": 39.724,
+      "min": 0.0,
+      "max": 199.0,
+      "median": 8.0
+    },
+    "MntMeatProducts": {
+      "mean": 166.9835,
+      "std": 225.6896,
+      "min": 0.0,
+      "max": 1725.0,
+      "median": 67.0
+    },
+    "MntFishProducts": {
+      "mean": 37.5362,
+      "std": 54.6486,
+      "min": 0.0,
+      "max": 259.0,
+      "median": 12.0
+    },
+    "MntSweetProducts": {
+      "mean": 27.0805,
+      "std": 41.2995,
+      "min": 0.0,
+      "max": 263.0,
+      "median": 8.0
+    },
+    "MntGoldProds": {
+      "mean": 43.983,
+      "std": 52.0616,
+      "min": 0.0,
+      "max": 362.0,
+      "median": 24.0
+    },
+    "NumDealsPurchases": {
+      "mean": 2.326,
+      "std": 1.933,
+      "min": 0.0,
+      "max": 15.0,
+      "median": 2.0
+    },
+    "NumWebPurchases": {
+      "mean": 4.0877,
+      "std": 2.78,
+      "min": 0.0,
+      "max": 27.0,
+      "median": 4.0
+    },
+    "NumCatalogPurchases": {
+      "mean": 2.6632,
+      "std": 2.9239,
+      "min": 0.0,
+      "max": 28.0,
+      "median": 2.0
+    },
+    "NumStorePurchases": {
+      "mean": 5.7956,
+      "std": 3.2511,
+      "min": 0.0,
+      "max": 13.0,
+      "median": 5.0
+    },
+    "NumWebVisitsMonth": {
+      "mean": 5.3189,
+      "std": 2.4269,
+      "min": 0.0,
+      "max": 20.0,
+      "median": 6.0
+    }
+  },
+  "income_imputation_median": 51371.0,
+  "pca": {
+    "n_components": 2,
+    "explained_variance": [
+      0.4079,
+      0.1166
+    ],
+    "total_explained_variance": 0.5245,
+    "axis_labels": [
+      "PC1, poder adquisitivo y gasto",
+      "PC2, ofertas, familia y web"
+    ],
+    "loadings": {
+      "Income": [
+        0.3422,
+        0.056
+      ],
+      "Age": [
+        0.0554,
+        0.255
+      ],
+      "Children": [
+        -0.2349,
+        0.3691
+      ],
+      "Recency": [
+        0.0067,
+        0.006
+      ],
+      "MntWines": [
+        0.3016,
+        0.2222
+      ],
+      "MntFruits": [
+        0.2877,
+        -0.0941
+      ],
+      "MntMeatProducts": [
+        0.3274,
+        -0.0981
+      ],
+      "MntFishProducts": [
+        0.2979,
+        -0.103
+      ],
+      "MntSweetProducts": [
+        0.2868,
+        -0.0704
+      ],
+      "MntGoldProds": [
+        0.2314,
+        0.1675
+      ],
+      "NumDealsPurchases": [
+        -0.0585,
+        0.6006
+      ],
+      "NumWebPurchases": [
+        0.2155,
+        0.4435
+      ],
+      "NumCatalogPurchases": [
+        0.3306,
+        0.0436
+      ],
+      "NumStorePurchases": [
+        0.2983,
+        0.2015
+      ],
+      "NumWebVisitsMonth": [
+        -0.2664,
+        0.2902
+      ]
+    }
+  },
+  "segments": {
+    "0": {
+      "id": 0,
+      "key": "low",
+      "name": "Ahorradores de bajo ingreso",
+      "short_name": "Ahorradores",
+      "color": "#64748b",
+      "description": "Clientes de ingreso bajo, con hijos y con un gasto mínimo en todas las categorías. Visitan mucho la web, pero compran poco.",
+      "recommendation": "Campañas de canasta básica y marca propia, junto con cupones digitales de bajo costo en la web para convertir las visitas en compras.",
+      "size": 989,
+      "percentage": 44.23,
+      "centroid_pca": [
+        -2.1691,
+        -0.5971
+      ],
+      "means": {
+        "Income": 34867.11,
+        "Age": 42.38,
+        "Children": 1.2,
+        "Recency": 49.08,
+        "MntWines": 37.64,
+        "MntFruits": 4.68,
+        "MntMeatProducts": 20.79,
+        "MntFishProducts": 6.94,
+        "MntSweetProducts": 4.84,
+        "MntGoldProds": 14.48,
+        "NumDealsPurchases": 1.84,
+        "NumWebPurchases": 1.99,
+        "NumCatalogPurchases": 0.51,
+        "NumStorePurchases": 3.18,
+        "NumWebVisitsMonth": 6.34,
+        "TotalSpent": 89.37,
+        "TotalPurchases": 5.68
+      },
+      "binary_rates": {
+        "AcceptedCmp1": 0.001,
+        "AcceptedCmp2": 0.002,
+        "AcceptedCmp3": 0.0677,
+        "AcceptedCmp4": 0.0121,
+        "AcceptedCmp5": 0.0,
+        "Response": 0.0819,
+        "Complain": 0.0111
+      }
+    },
+    "1": {
+      "id": 1,
+      "key": "premium",
+      "name": "Premium de alto gasto",
+      "short_name": "Premium",
+      "color": "#7c3aed",
+      "description": "Clientes de ingreso alto, casi sin hijos y con el mayor gasto en vinos y carnes. Compran mucho por catálogo y en tienda, casi no usan descuentos y son los que más responden a las campañas.",
+      "recommendation": "Programa VIP con catálogo de vinos, carnes y pescado, preventas exclusivas y atención personalizada, sin ofrecer descuentos.",
+      "size": 474,
+      "percentage": 21.2,
+      "centroid_pca": [
+        3.658,
+        -0.8542
+      ],
+      "means": {
+        "Income": 77738.42,
+        "Age": 44.78,
+        "Children": 0.14,
+        "Recency": 49.78,
+        "MntWines": 602.69,
+        "MntFruits": 71.63,
+        "MntMeatProducts": 495.69,
+        "MntFishProducts": 106.28,
+        "MntSweetProducts": 74.83,
+        "MntGoldProds": 78.08,
+        "NumDealsPurchases": 1.15,
+        "NumWebPurchases": 4.9,
+        "NumCatalogPurchases": 6.21,
+        "NumStorePurchases": 8.48,
+        "NumWebVisitsMonth": 2.45,
+        "TotalSpent": 1429.21,
+        "TotalPurchases": 19.59
+      },
+      "binary_rates": {
+        "AcceptedCmp1": 0.2236,
+        "AcceptedCmp2": 0.0211,
+        "AcceptedCmp3": 0.0759,
+        "AcceptedCmp4": 0.1076,
+        "AcceptedCmp5": 0.27,
+        "Response": 0.2806,
+        "Complain": 0.0042
+      }
+    },
+    "2": {
+      "id": 2,
+      "key": "consolidated",
+      "name": "Consolidados multicanal",
+      "short_name": "Consolidados",
+      "color": "#0ea5e9",
+      "description": "Clientes de ingreso medio alto, con menos de un hijo en promedio y un gasto alto en vinos y oro. Compran por todos los canales, es decir, web, tienda y catálogo.",
+      "recommendation": "Venta cruzada de vino con productos gourmet y beneficios por comprar en varios canales. Son candidatos a pasar al grupo Premium con una membresía.",
+      "size": 434,
+      "percentage": 19.41,
+      "centroid_pca": [
+        1.5159,
+        0.7911
+      ],
+      "means": {
+        "Income": 63878.88,
+        "Age": 48.7,
+        "Children": 0.85,
+        "Recency": 49.08,
+        "MntWines": 551.02,
+        "MntFruits": 39.35,
+        "MntMeatProducts": 204.24,
+        "MntFishProducts": 50.81,
+        "MntSweetProducts": 39.03,
+        "MntGoldProds": 69.26,
+        "NumDealsPurchases": 2.6,
+        "NumWebPurchases": 6.35,
+        "NumCatalogPurchases": 4.15,
+        "NumStorePurchases": 8.55,
+        "NumWebVisitsMonth": 4.83,
+        "TotalSpent": 953.7,
+        "TotalPurchases": 19.05
+      },
+      "binary_rates": {
+        "AcceptedCmp1": 0.0599,
+        "AcceptedCmp2": 0.0323,
+        "AcceptedCmp3": 0.0783,
+        "AcceptedCmp4": 0.1244,
+        "AcceptedCmp5": 0.076,
+        "Response": 0.1429,
+        "Complain": 0.0115
+      }
+    },
+    "3": {
+      "id": 3,
+      "key": "deals",
+      "name": "Familias cazadoras de ofertas",
+      "short_name": "Ofertas",
+      "color": "#f59e0b",
+      "description": "Clientes de ingreso medio, con la mayor cantidad de hijos y el mayor uso de compras con descuento. Compran por la web y visitan mucho el sitio.",
+      "recommendation": "Promociones 2x1 y paquetes familiares por correo y web, con descuentos en productos de consumo frecuente para subir el valor de cada compra.",
+      "size": 339,
+      "percentage": 15.16,
+      "centroid_pca": [
+        -0.7341,
+        1.927
+      ],
+      "means": {
+        "Income": 50474.26,
+        "Age": 48.87,
+        "Children": 1.48,
+        "Recency": 48.34,
+        "MntWines": 348.04,
+        "MntFruits": 9.14,
+        "MntMeatProducts": 86.19,
+        "MntFishProducts": 13.67,
+        "MntSweetProducts": 9.91,
+        "MntGoldProds": 50.01,
+        "NumDealsPurchases": 5.03,
+        "NumWebPurchases": 6.18,
+        "NumCatalogPurchases": 2.07,
+        "NumStorePurchases": 6.16,
+        "NumWebVisitsMonth": 6.98,
+        "TotalSpent": 516.96,
+        "TotalPurchases": 14.4
+      },
+      "binary_rates": {
+        "AcceptedCmp1": 0.0324,
+        "AcceptedCmp2": 0.0118,
+        "AcceptedCmp3": 0.0767,
+        "AcceptedCmp4": 0.1475,
+        "AcceptedCmp5": 0.0029,
+        "Response": 0.1711,
+        "Complain": 0.0059
+      }
+    }
+  },
+  "noise_segment": {
+    "id": -1,
+    "key": "noise",
+    "name": "Atípico (ruido)",
+    "short_name": "Ruido",
+    "color": "#ef4444",
+    "description": "El cliente está lejos de cualquier zona densa de clientes, por eso DBSCAN no lo asigna a ningún grupo.",
+    "recommendation": "Revisar el caso de forma manual, ya que puede ser un error de captura o un cliente con un comportamiento poco común que merece atención individual."
+  },
+  "global_binary_rates": {
+    "AcceptedCmp1": 0.0644,
+    "AcceptedCmp2": 0.0134,
+    "AcceptedCmp3": 0.0729,
+    "AcceptedCmp4": 0.0747,
+    "AcceptedCmp5": 0.0725,
+    "Response": 0.1494,
+    "Complain": 0.0089
+  }
+}
