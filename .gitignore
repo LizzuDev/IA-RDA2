@@ -44,7 +44,7 @@ test-results/
 playwright-report/
 
 # Modelos exportados por el notebook (se regeneran al ejecutarlo)
-models/
+/models/
 
 #Archivos locales de herramientas
 .claude/
